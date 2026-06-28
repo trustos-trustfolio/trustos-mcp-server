@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "trustos": {
+      "command": "node",
+      "args": ["C:/trustos-mcp-server/dist/index.js"],
+      "env": {
+        "TRUSTOS_API_KEY": "YOUR_API_KEY"
+      }
+    }
+  }
+}

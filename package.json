@@ -1,0 +1,47 @@
+{
+  "name": "@trustos/mcp-server",
+  "version": "0.1.0",
+  "description": "MCP server for verifying high-impact decisions with Trust OS",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "trustos-mcp-server": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "trust-os",
+    "decision-verification",
+    "ai-agents",
+    "claude",
+    "modelcontextprotocol"
+  ],
+  "author": "Trustfolio Inc. <admin@trust-os.io>",
+  "license": "MIT",
+  "homepage": "https://trust-os.io",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/trustos-trustfolio/trustos-mcp-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/trustos-trustfolio/trustos-mcp-server/issues"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "dotenv": "^16.4.5",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.15.0",
+    "typescript": "^5.5.2"
+  }
+}
