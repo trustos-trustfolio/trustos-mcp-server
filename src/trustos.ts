@@ -1,6 +1,6 @@
 import type { VerifyDecisionInput } from "./schemas.js";
 
-const DEFAULT_BASE_URL = "https://trustos-core-gateway-v2-7jm9owrs.an.gateway.dev";
+const DEFAULT_BASE_URL = "https://api.trust-os.io";
 const VERIFY_PATH = "/v1/decision/verify";
 
 export type VerifyDecisionResult = {
