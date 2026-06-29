@@ -1,31 +1,32 @@
 # Trust OS MCP Server
 
-MCP server for verifying high-impact decisions with Trust OS.
-
-Connect any MCP-compatible AI agent — Claude Desktop, Cursor, or any MCP client — to the [Trust OS Decision Verification API](https://trust-os.io) and verify financial and operational decisions before execution.
-
-**Links**
-- Website: [https://trust-os.io](https://trust-os.io)
-- Docs: [https://trust-os.io/docs](https://trust-os.io/docs)
-- API Reference: [https://trust-os.io/docs/api](https://trust-os.io/docs/api)
-- Playground: [https://demo.trust-os.io](https://demo.trust-os.io)
-- Operations Demo: [https://ops.trust-os.io](https://ops.trust-os.io)
-- OpenAPI: [https://trust-os.io/openapi.json](https://trust-os.io/openapi.json)
-- GitHub Org: [https://github.com/trustos-trustfolio](https://github.com/trustos-trustfolio)
+Official MCP Server for AI decision verification with Trust OS.
 
 ---
 
-## What it does
+## What is Trust OS?
 
-The Trust OS MCP Server exposes the Trust OS Decision Verification API as an MCP tool. When an AI agent calls `verify_decision`, the server:
+Trust OS is a Decision Verification Platform that helps organizations verify high-impact decisions before execution.
 
-1. Validates the input (action, amount, currency, destination, etc.)
-2. POSTs the payload to Trust OS `/v1/decision/verify`
-3. Returns a structured response including risk score, recommendation, and cryptographic proof
+- Decision verification
+- Risk evaluation
+- Policy enforcement
+- Auditability
+- Explainability
+- API-first integration
 
 ---
 
-## Installation
+## Features
+
+- MCP-compatible tool for any MCP client
+- `verify_decision` tool with structured input/output
+- Claude Desktop integration
+- Automatic risk assessment and cryptographic proof
+
+---
+
+## Quick Start
 
 ```bash
 git clone https://github.com/trustos-trustfolio/trustos-mcp-server.git
@@ -34,28 +35,14 @@ npm install
 npm run build
 ```
 
----
-
-## Environment Variables
-
-Copy `.env.example` to `.env` and fill in your API key:
+Set your API key:
 
 ```bash
 cp .env.example .env
+# Edit .env and set TRUSTOS_API_KEY=your_api_key_here
 ```
 
-| Variable | Required | Description |
-|---|---|---|
-| `TRUSTOS_API_KEY` | Yes | Your Trust OS API key |
-| `TRUSTOS_BASE_URL` | No | Override API base URL (default: Trust OS gateway) |
-
-Never commit `.env` to version control.
-
----
-
-## Claude Desktop Configuration
-
-Add the following to your Claude Desktop `claude_desktop_config.json`:
+Add to Claude Desktop (`claude_desktop_config.json`):
 
 ```json
 {
@@ -71,87 +58,60 @@ Add the following to your Claude Desktop `claude_desktop_config.json`:
 }
 ```
 
-See [`examples/claude_desktop_config.json`](./examples/claude_desktop_config.json) for the full example.
-
-**Claude Desktop config file location:**
+Config file locations:
 - macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
 
 ---
 
-## Tool: `verify_decision`
+## Tool Reference
 
-**Description:** Verify a high-impact decision before execution using Trust OS.
+### `verify_decision`
 
-**Input schema:**
+Verify a high-impact decision before execution.
 
 | Field | Type | Required | Description |
 |---|---|---|---|
-| `action` | string | Yes | The action or decision to verify |
-| `amount` | number | No | Monetary amount involved |
-| `currency` | string | No | Currency code (e.g. USDC, USD) |
-| `destination` | string | No | Destination address or identifier |
-| `source` | string | No | Source address or identifier |
-| `priority` | string | No | Priority level (e.g. high, critical) |
-| `metadata` | object | No | Additional context as key-value pairs |
+| `action` | string | Yes | The action to verify |
+| `amount` | number | No | Monetary amount |
+| `currency` | string | No | Currency code (e.g. USDC) |
+| `destination` | string | No | Destination identifier |
+| `source` | string | No | Source system |
+| `priority` | string | No | Priority level |
+| `metadata` | object | No | Additional context |
 
----
-
-## Example Prompt
+**Example prompt:**
 
 ```
 Use Trust OS to verify this decision before execution:
 action stablecoin_transfer, amount 50000, currency USDC, destination wallet_abc.
 ```
 
----
-
-## Example Response
+**Example response:**
 
 ```
 Trust OS Decision Verification Result
 ════════════════════════════════════════
-decision_id   : txn_a1b2c3d4
+decision_id   : dec_a1b2c3d4
 recommendation: APPROVE
-risk_score    : 12
+risk_score    : 0.18
 risk_level    : LOW
-policy        : standard_transfer_policy
-proof_hash    : 0xabc123...
+policy        : Stablecoin Settlement Policy v1.0
+proof_hash    : SHA-256: 0xabc123...
 verified      : true
 latency_ms    : 142
-
-Full response:
-{
-  "decision_id": "txn_a1b2c3d4",
-  "recommendation": "APPROVE",
-  "risk_score": 12,
-  ...
-}
 ```
 
 ---
 
-## Security
+## Documentation
 
-- Store `TRUSTOS_API_KEY` in the MCP client's `env` config, never in source code
-- `.env` is git-ignored
-- API key is never logged or included in error messages
-- To report a vulnerability, email **founder@trust-os.io** (see [SECURITY.md](./SECURITY.md))
-
----
-
-## Contributing
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md).
-
----
-
-## Changelog
-
-See [CHANGELOG.md](./CHANGELOG.md).
+- Website: https://trust-os.io
+- Developer Docs: https://trust-os.io/docs
+- OpenAPI: https://trust-os.io/openapi.json
 
 ---
 
 ## License
 
-MIT © Trustfolio Inc.
+MIT
